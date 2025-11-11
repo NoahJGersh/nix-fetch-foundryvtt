@@ -3,7 +3,7 @@ foundryPkg:
   username ? "",
   password ? "",
   passwordFile ? "",
-  installDirectory ? "/etc/foundryvtt",
+  installDir ? "/etc/foundryvtt",
   ...
 }:
 foundryPkg.overrideAttrs (old:
@@ -35,8 +35,8 @@ foundryPkg.overrideAttrs (old:
 
       # Add to store and prevent garbage collection
       STORE_PATH=$(nix-store --add-fixed sha256 ${filename})
-      mkdir -p ${installDirectory}
-      nix-store --add-root ${installDirectory}/${filename} -r $STORE_PATH
+      mkdir -p ${installDir}
+      nix-store --add-root ${installDir}/${filename} -r $STORE_PATH
 
       # Clean up
       rm /tmp/cookies.txt
