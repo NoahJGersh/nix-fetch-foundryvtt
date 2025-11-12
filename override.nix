@@ -8,12 +8,12 @@ foundryPkg:
   build ? "350",
   ...
 }:
-foundryPkg.overrideAttrs (_:
+foundryPkg.overrideAttrs (old:
   let
     filename = "${majorVersion}.${build}";
   in
   {
-    preUnpack = ''
+    prePhases = old.prePhases or [] ++ [''
       # Get tokens from main webpage...
       # 1. csrftoken cookie -> /tmp/cookies.txt
       # 2. csrfmiddlewaretoken value
@@ -42,6 +42,6 @@ foundryPkg.overrideAttrs (_:
 
       # Clean up
       rm /tmp/cookies.txt
-    '';
+    ''];
   }
 )
