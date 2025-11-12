@@ -8,7 +8,7 @@ foundryPkg:
   build ? "350",
   ...
 }:
-foundryPkg.overrideAttrs (old:
+foundryPkg.overrideAttrs (_:
   let
     filename = "${majorVersion}.${build}";
   in
